@@ -1,12 +1,33 @@
-import * as React from 'react'
-import Layout from '../components/layout'
+import * as React from "react"
+import { renderRichText } from "gatsby-source-contentful/rich-text"
+import { graphql } from "gatsby"
 
-const AboutPage = () => {
-  return (
-    <Layout pageTitle="About Me">
-      <p>Hi there! I'm the proud creator of this site, which I built with Gatsby.</p>
-    </Layout>
-  )
+import Layout from "../components/layout"
+
+// import { homeQuery } from "./query"
+
+const IndexPage = ({ data }) => {
+	// const { logo, title, description, createdOn } = data.contentfulHome
+
+	return <Layout pageTitle='Home Page'>{JSON.stringify(data)}</Layout>
 }
+export const homeQuery = graphql`
+	query {
+		contentfulAbout {
+			aboutTitle
+			contactUsTitle
+			firstNameLabel
+			firstNameValidationMessage
+			lastNameLabel
+			lastNameValidationMessage
+			submitButtonLabel
+			aboutUs {
+				raw
+			}
+		}
+	}
+`
 
-export default AboutPage
+// export const query = homeQuery
+
+export default IndexPage
